@@ -6,13 +6,22 @@ const { json } = require('body-parser');
 
 module.exports = () => {
   const app = express();
-
+  var jsonParser = bodyParser.json()
+  
   // SETANDO VARIÁVEIS DA APLICAÇÃO
   app.set('port', process.env.PORT || config.get('server.port'));
 
 
   app.get('/user/get', function (req, res) {
     return user.selectCustomers(req, res)
+  })
+
+  app.post('/user/post', jsonParser, async function (req, res) {
+    console.log(req.body)
+    //res.json({message:"building route"})
+    let teste = await user.insertCustomer(req.body, res)
+    console.log(teste)
+    return teste
   })
 
   app.get('/', function (req, res) {
