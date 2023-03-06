@@ -4,7 +4,7 @@ module.exports = app => {
   //app.route('/api/usuario').get(controller.listCustomerWallets);
 
   app.route('/api/usuario', (req, res) => {
-    console.log('ok')
+    //console.log('ok')
     tasks.selectCustomers().then(data => res.json(data));
   });
 

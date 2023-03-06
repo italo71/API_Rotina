@@ -17,10 +17,10 @@ module.exports = () => {
   })
 
   app.post('/user/post', jsonParser, async function (req, res) {
-    console.log(req.body)
+   //(req.body)
     //res.json({message:"building route"})
     let teste = await user.insertCustomer(req.body, res)
-    console.log(teste)
+    //console.log(teste)
     return teste
   })
 

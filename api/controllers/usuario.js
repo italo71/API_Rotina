@@ -19,11 +19,11 @@ class task {
   }
 
   async insertCustomer(req, res) {
-    console.log(req)
+    //console.log(req)
     const client = await db.connect();
     const sql = 'INSERT INTO usuario(nome,login,senha,email) VALUES ($1,$2,$3,$4);';
     const values = [req.nome, req.login, req.senha, req.email];
-    console.log('inserting')
+    //console.log('inserting')
     let teste = client.query(sql, values);
     const result = await client.query('SELECT * FROM usuario');
     await res.json(result.rows); 
