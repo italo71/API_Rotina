@@ -40,7 +40,7 @@ class task {
     const values = [req.nome, req.login, req.senha, req.email];
     
     let r = await client.query(sql, values);
-    let result = {"message":"usuario salvo"}
+    let result = {"status":"success","message":"usuario salvo"}
     await res.json(result);
   }
 }

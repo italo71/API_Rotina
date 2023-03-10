@@ -4,7 +4,8 @@ async function connect() {
 
     const { Pool } = require('pg');
     const pool = new Pool({
-        connectionString: 'postgres://postgres:123@localhost:5432/rotina'
+        //connectionString: 'postgres://postgres:123@localhost:5432/rotina'
+        connectionString: 'postgres://timpadmin:0709!!Bi@timp.postgres.database.azure.com/postgres?sslmode=require'
     });
 
     //apenas testando a conexão
