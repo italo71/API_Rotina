@@ -54,7 +54,7 @@ module.exports = () => {
   });
 
   app.get('/', function (req, res) {
-    res.json({ message: "Welcome to my Api" });
+    res.json({ message: "Welcome to Rotina's API" });
   });
 
   // MIDDLEWARES
