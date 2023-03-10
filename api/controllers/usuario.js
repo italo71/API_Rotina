@@ -19,7 +19,8 @@ class task {
   async selectLogin(req, res){
     const client = await db.connect();
     let result;
-    result = await client.query(`SELECT nome,email FROM usuario WHERE LOGIN = '${req.login}' AND SENHA = '${req.senha} limit 1'`);
+    let vSQL = `SELECT nome,email FROM usuario WHERE LOGIN = '${req.login}' AND SENHA = '${req.senha}' limit 1`
+    result = await client.query(vSQL);
     if(result.rowCount == 0){
     let e = {"status":"erro","message":"usuário não encontrado"}
       return e
