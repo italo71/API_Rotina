@@ -5,9 +5,22 @@ const user = require('../api/controllers/usuario');
 const { json } = require('body-parser');
 const { response } = require('express');
 const tarefas = require('../api/controllers/tarefas')
-
+const cors = require('cors');
 module.exports = () => {
+
+
+
   const app = express();
+
+  app.use((req, res, next) => {
+    //Qual site tem permissão de realizar a conexão, no exemplo abaixo está o "*" indicando que qualquer site pode fazer a conexão
+    res.header("Access-Control-Allow-Origin", "*");
+    //Quais são os métodos que a conexão pode realizar na API
+    res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
+    app.use(cors());
+    next();
+  });
+
   var jsonParser = bodyParser.json()
 
   // SETANDO VARIÁVEIS DA APLICAÇÃO
@@ -29,14 +42,15 @@ module.exports = () => {
 
   app.post('/user/get', jsonParser, async function (req, res) {
     let r;
+    console.log(req)
     if (req.body.type == 'login') {
       r = await user.selectLogin(req.body, res);
       if (r.status == 'erro')
-        res.status(404).send(r)
+        res.status(200).send(r)
     }
     else {
       let e = { "status": "erro", "message": "Tipo de requisição não suportada" }
-      res.status(400).send(e)
+      res.status(200).send(e)
     }
     res.status(200).send(r)
   });
