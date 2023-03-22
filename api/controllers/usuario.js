@@ -6,7 +6,6 @@ class task {
   async selectCustomers(req, res) {
     const client = await db.connect();
     var result = '';
-    console.log(req.type)
     /* if(req.type == "login"){
       result = await client.query(`SELECT * FROM usuario WHERE LOGIN = '${req.login}' AND SENHA = '${req.senha}'`);
     } */

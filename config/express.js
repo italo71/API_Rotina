@@ -42,7 +42,6 @@ module.exports = () => {
 
   app.post('/user/get', jsonParser, async function (req, res) {
     let r;
-    console.log(req)
     if (req.body.type == 'login') {
       r = await user.selectLogin(req.body, res);
       if (r.status == 'erro')
@@ -63,7 +62,6 @@ module.exports = () => {
       response = e
       res.status(200).send(e)
     }
-    console.log(response)
     return response
   });
 
