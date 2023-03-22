@@ -25,7 +25,7 @@ class task {
     let e = {"status":"erro","message":"usuário não encontrado"}
       return e
     }
-    return result.rows;
+    return {"status":"success","data":result.rows[0]};
   }
 
   async updateCustomer(req, res) {
