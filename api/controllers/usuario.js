@@ -1,5 +1,4 @@
 
-  const customerWalletsDB = require('../data/usuario.json');
   const controller = {};
   const db = require("../../config/db");
 class task {
