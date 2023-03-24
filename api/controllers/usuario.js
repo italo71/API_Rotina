@@ -1,5 +1,4 @@
 
-const controller = {};
 const db = require("../../config/db");
 class task {
   async selectCustomers(req, res) {
@@ -35,12 +34,14 @@ class task {
 
   async insertCustomer(req, res) {
     const client = await db.connect();
-    const sql = 'INSERT INTO usuario(nome,login,senha,email) VALUES ($1,$2,$3,$4);';
-    const values = [req.nome, req.login, req.senha, req.email];
-
-    let r = await client.query(sql, values);
-    let result = { "status": "success", "message": "usuario salvo" }
-    await res.json(result);
+    var sql = `INSERT INTO usuario(nome,login,senha,email,data_nasc) VALUES ('${req.nome}','${req.login}','${req.senha}','${req.email}','${req.data_nasc}');`;
+    console.log(sql)
+    let r = await client.query(sql);
+    if (r.rowCount != 0) {
+      let result = { "status": "success", "message": "usuario salvo" }
+      return result
+    }
+    return {"status":"erro","mensage":"Erro ao criar usuario"}
   }
 }
 module.exports = new task()

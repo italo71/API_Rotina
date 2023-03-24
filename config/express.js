@@ -5,10 +5,20 @@ const user = require('../api/controllers/usuario');
 const { json } = require('body-parser');
 const { response } = require('express');
 const tarefas = require('../api/controllers/tarefas')
+const cors = require('cors');
 
 module.exports = () => {
   const app = express();
   var jsonParser = bodyParser.json()
+  app.use(bodyParser.json());
+  app.use((req, res, next) => {
+    //Qual site tem permissão de realizar a conexão, no exemplo abaixo está o "*" indicando que qualquer site pode fazer a conexão
+    res.header("Access-Control-Allow-Origin", "*");
+    //Quais são os métodos que a conexão pode realizar na API
+    res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
+    app.use(cors());
+    next();
+  });
 
   // SETANDO VARIÁVEIS DA APLICAÇÃO
   app.set('port', process.env.PORT || config.get('server.port'));
@@ -43,13 +53,10 @@ module.exports = () => {
 
   app.post('/user/post', jsonParser, async function (req, res) {
     let response
-    try {
-      response = await user.insertCustomer(req.body, res)
-    } catch (e) {
-      response = e
-      res.status(200).send(e)
-    }
-    return response
+
+    response = await user.insertCustomer(req.body, res)
+    console.log(response)
+    res.status(200).send(response)
   });
 
   app.get('/', function (req, res) {
@@ -57,7 +64,7 @@ module.exports = () => {
   });
 
   // MIDDLEWARES
-  app.use(bodyParser.json());
+
 
   return app;
 };
