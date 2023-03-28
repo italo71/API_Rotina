@@ -27,14 +27,25 @@ module.exports = () => {
     let r;
     //console.log(req.body)
     if (req.body.type == null) {
-      try {
-        r = await tarefas.postTarefas(req.body, res)
-      } catch (e) {
-        res.status(400).send({ "status": "erro" })
+      r = await tarefas.postTarefas(req.body, res)
+      console.log(r)
+      if (r.status == 'erro') {
+        res.status(200).send(r)
+      }
+      else {
+        res.status(200).send(r)
       }
     }
-    res.status(200).send(r)
-    return r
+    else if (req.body.type == 'get_user') {
+      r = await tarefas.getTarefasByUserID(req.body, res)
+      if (r.status == 'erro') {
+        res.status(200).send(r)
+      }
+      else {
+        res.status(200).send(r)
+      }
+    }
+    res.status(400).send()
   });
 
   app.post('/user/get', jsonParser, async function (req, res) {
