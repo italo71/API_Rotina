@@ -25,10 +25,8 @@ module.exports = () => {
 
   app.post('/tarefas', jsonParser, async function (req, res) {
     let r;
-    //console.log(req.body)
     if (req.body.type == null) {
       r = await tarefas.postTarefas(req.body, res)
-      console.log(r)
       if (r.status == 'erro') {
         res.status(200).send(r)
       }
@@ -66,7 +64,6 @@ module.exports = () => {
     let response
 
     response = await user.insertCustomer(req.body, res)
-    console.log(response)
     res.status(200).send(response)
   });
 

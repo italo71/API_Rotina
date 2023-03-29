@@ -16,7 +16,7 @@ class task {
   async selectLogin(req, res) {
     const client = await db.connect();
     let result;
-    let vSQL = `SELECT nome,email,data_nasc FROM usuario WHERE LOGIN = '${req.login}' AND SENHA = '${req.senha}' limit 1`
+    let vSQL = `SELECT id,nome,email,data_nasc FROM usuario WHERE LOGIN = '${req.login}' AND SENHA = '${req.senha}' limit 1`
     result = await client.query(vSQL);
     if (result.rowCount == 0) {
       let e = { "status": "erro", "message": "usuário não encontrado" }
@@ -41,7 +41,7 @@ class task {
       let result = { "status": "success", "message": "usuario salvo" }
       return result
     }
-    return {"status":"erro","mensage":"Erro ao criar usuario"}
+    return { "status": "erro", "mensage": "Erro ao criar usuario" }
   }
 }
 module.exports = new task()

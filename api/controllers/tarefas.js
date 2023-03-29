@@ -5,20 +5,20 @@ class task {
         console.log(req)
         if ((req.id_usu != null && req.descricao != null) || (req.id_usu != '' && req.descricao != '')) {
             const client = await db.connect();
-            let sql = `INSERT INTO tarefas (id_usuario,data_criacao,descricao) VALUES (${req.id_usu},current_date,'${req.descricao}')`;
+            let sql = `INSERT INTO tarefas (id_usuario,data_criacao,titulo,descricao) VALUES (${req.id_usu},current_date,'${req.titulo}','${req.descricao}')`;
             //const values = [req.id_usu, req.descricao];
             let r;
             try { r = await client.query(sql) }
             catch (erro) { if (erro.error == undefined) { return { "status": "erro", "messagem": "preencha os dados obrigatorios" } } else return { "status": "erro", "message": "consulte o administrador da aplicação" } }
             let response;
             if (r.rowCount == 0)
-                response = { "status": "erro", "message": "não foi possível realizar a operação" }
+                response = { "status": "erro", "message": "Não foi possível realizar a operação" }
             else
-                response = { "status": "success", "message": "usuario salvo" }
+                response = { "status": "success", "message": "Tarefa salva com sucesso" }
             return response
         }
         else {
-            return { "status": "erro", "message": "preencha os dados obrigatorios" }
+            return { "status": "erro", "message": "Preencha os dados obrigatorios" }
         }
     }
 
