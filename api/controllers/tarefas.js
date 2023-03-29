@@ -2,7 +2,6 @@ const { response } = require("express");
 const db = require("../../config/db");
 class task {
     async postTarefas(req, res) {
-        console.log(req)
         const client = await db.connect();
         let sql = `INSERT INTO tarefas (id_usuario,data_criacao,titulo,descricao) VALUES (${req.id_usu},current_date,'${req.titulo}','${req.descricao}')`;
         //const values = [req.id_usu, req.descricao];
@@ -25,7 +24,7 @@ class task {
         try {
             r = await client.query(sql)
         }
-        catch (e) { console.log(e); return { "status": "erro", "message": "consulte administrador da aplicação" } }
+        catch (e) {  return { "status": "erro", "message": "consulte administrador da aplicação" } }
         if (r.rowCount != 0) {
             let data = new Array
             for (let i = 0; i < r.rowCount; i++) {
