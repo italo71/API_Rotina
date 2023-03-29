@@ -36,12 +36,12 @@ module.exports = () => {
     }
     else if (req.body.type == 'get_user') {
       r = await tarefas.getTarefasByUserID(req.body, res)
-      if (r.status == 'erro') {
+      /* if (r.status == 'erro') {
         res.status(200).send(r)
       }
       else {
         res.status(200).send(r)
-      }
+      } */
     }
     res.status(400).send()
   });

@@ -4,7 +4,6 @@ class task {
     async postTarefas(req, res) {
         const client = await db.connect();
         let sql = `INSERT INTO tarefas (id_usuario,data_criacao,titulo,descricao) VALUES (${req.id_usu},current_date,'${req.titulo}','${req.descricao}')`;
-        //const values = [req.id_usu, req.descricao];
         let r;
         try { r = await client.query(sql) }
         catch (erro) { if (erro.error == undefined) { return { "status": "erro", "messagem": "preencha os dados obrigatorios" } } else return { "status": "erro", "message": "consulte o administrador da aplicação" } }
@@ -30,7 +29,8 @@ class task {
             for (let i = 0; i < r.rowCount; i++) {
                 data[i] = r.rows[i]
             }
-            return { "status": "success", "data": data }
+            res.status(200).send({ "status": "success", "data": data })
+            //return { "status": "success", "data": data }
         }
         else {
             return { "status": "erro", "message": "nao foram encontrados registros" }
