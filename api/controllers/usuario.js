@@ -32,6 +32,16 @@ class task {
     await res.json(client.query(sql, values));
   }
 
+  async validaLogin(req, res) {
+    const client = await db.connect();
+    let sql = `select * from usuario where login = '${req.login}'`
+    let r = await client.query(sql)
+    if (r.rowCount == 0)
+      res.status(200).send({ "status": "success", "data": "usuario livre" })
+    else
+      res.status(200).send({ "status": "erro", "message": "login ja cadastrado" })
+  }
+
   async insertCustomer(req, res) {
     const client = await db.connect();
     var sql = `INSERT INTO usuario(nome,login,senha,email,data_nasc) VALUES ('${req.nome}','${req.login}','${req.senha}','${req.email}','${req.data_nasc}');`;

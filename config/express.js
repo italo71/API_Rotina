@@ -53,6 +53,9 @@ module.exports = () => {
       if (r.status == 'erro')
         res.status(404).send(r)
     }
+    else if (req.body.type == 'verifica') {
+      await user.validaLogin(req.body, res)
+    }
     else {
       let e = { "status": "erro", "message": "Tipo de requisição não suportada" }
       res.status(400).send(e)
