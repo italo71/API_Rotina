@@ -35,7 +35,9 @@ class task {
   async validaLogin(req, res) {
     const client = await db.connect();
     let sql = `select * from usuario where login = '${req.login}'`
+    console.log(sql)
     let r = await client.query(sql)
+    console.log(r)
     if (r.rowCount == 0)
       res.status(200).send({ "status": "success", "data": "usuario livre" })
     else

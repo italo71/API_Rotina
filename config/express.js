@@ -54,6 +54,7 @@ module.exports = () => {
         res.status(404).send(r)
     }
     else if (req.body.type == 'verifica') {
+      console.log(req.body)
       await user.validaLogin(req.body, res)
     }
     else {
