@@ -9,6 +9,7 @@ const cors = require('cors');
 
 module.exports = () => {
   const app = express();
+  app.use(cors({ origin: '*' }));
   var jsonParser = bodyParser.json()
   app.use(bodyParser.json());
   app.use((req, res, next) => {
@@ -16,7 +17,7 @@ module.exports = () => {
     res.header("Access-Control-Allow-Origin", "*");
     //Quais são os métodos que a conexão pode realizar na API
     res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
-    app.use(cors());
+
     next();
   });
 
